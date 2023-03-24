@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 4</title>
+</head>
+<body>
+  <!--Tenemos una api alojada en el dominio pruebas.zendha.net (es ficticio), al realizar
+una petición a esa api devuelve una matriz de longitud desconocida que incluye
+objetos con los siguientes 4 datos como en la imagen.
+
+Genera un objeto que realice las siguientes acciones:
+1. Petición a la HTTP a la dirección (prueba.zendha.net) parámetro GET facturas
+y con su devolución:
+2. Genera un método para realizar cada una de las siguientes acciones:
+1. IVA total de los registros devueltos
+2. Cantidad vendida a cada receptor (teniendo en cuenta que estos pueden
+repetirse)
+3. Periodos de las fechas en las que hay facturas.
+4. Genera una función que al pasar el resultado de los puntos anteriores
+genere una tabla maquetada en FLEXBOX.
+  -->
+  <script>
+    [
+      {
+        'receptor': 'Mario López',
+        'fecha': '10/10/2022',
+        'importe_subtotal': '$7,205.40',
+        'numero_factura': '1'
+      },
+      {
+        'receptor': 'Luis Gutierez',
+        'fecha': '11/10/2022',
+        'importe_subtotal': '$4,300.00',
+        'numero_factura': '2'
+      },
+      {
+        'receptor': 'Fernanda Campos',
+        'fecha': '12/10/2022',
+        'importe_subtotal': '$7,135.40',
+        'numero_factura': '3'
+      },
+      {
+        'receptor': 'Renata Gómez',
+        'fecha': '13/10/2022',
+        'importe_subtotal': '$2,800.00',
+        'numero_factura': '4'
+      },
+    ]
+
+    const Facturas = {
+      obtenerFacturas: async function() {
+        try {
+          const response = await fetch('https://prueba.zendha.net/facturas', {method: 'GET'});
+
+          const datos = await response.json();
+          return datos;
+        } catch(error) {
+          console.log(error);
+          return null;
+        }
+      },
+
+      calcularIvaTotal: function () {
+        let ivaTotal = 0;
+        this.facturas.array.forEach(factura => {
+          ivaTotal = ivaTotal + factura.iva;
+        });
+        return ivaTotal;
+      },
+
+      calcularCantidadVendidaReceptor: function() {
+        const cantidadReceptor = {};
+        this.facturas.forEach(factura => {
+          const receptor = factura.receptor;
+          const cantidad = factura.cantidad;
+          if(cantidadReceptor[receptor]){
+            cantidadReceptor[receptor] = cantidadReceptor[receptor] + cantidad;
+          } else {
+            cantidadReceptor[receptor] = cantidad;
+          }
+        });
+      },
+
+      calculaPeriodos: function () {
+        const fechas = this.facturas.map(factura => new Date(factura.fecha));
+        const fechasOrdenadas = fecha.sort((a,b)=>a-b);
+        const periodos = [];
+
+        for(let i = 0; i < fechasOrdenadas.length; i++) {
+          if(i === 0 || fechasOrdenadas[i].getFullYear() !== fechasOrdenadas[i - 1].getFullYear()) {
+            periodos.push({inicio: fechasOrdenadas[i], fin: fechasOrdenadas[i]});
+          } else {
+            periodos[periodos.length-1].fin = fechasOrdenadas[i];
+          }
+        }
+        return periodos;
+      },
+    };
+
+    Facturas.obtenerFacturas().then(datos => { console.log(datos); }).catch(error => { console.log(error); });
+    
+  </script>
+</body>
+</html>

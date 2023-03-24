@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 1</title>
+</head>
+<body>
+  <!--Escribe un programa en PHP, JS o Python que imprima una X construida a base de
+los símbolos /, \ y X (barra, contrabarra y letra X) y utilizar un doble espacio cuando
+no haya carácter.
+El tamaño de la x se basa en una variable n que indicará la altura de la letra para
+imprimir (en una matríz de n x n) por ejemplo:-->
+<script>
+  let n = 0;
+
+
+  console.log('Hola, ingresa un valor para n: \n'); 
+  n = 6;
+
+  console.log(n);
+
+  if (n === 0) {
+    console.log("ERROR");
+  } else {
+    for(let i = 0; i < n; i++) {
+      let imprimirFila = '';
+
+      for (let j = 0; j < n; j++) {
+        if (i === j || i === (n-j-1)) {
+          imprimirFila = imprimirFila + '/';
+        } else if (j === n / 2 || i === n / 2) {
+          imprimirFila = imprimirFila + ' ';
+        } else if (i === j + 1 || i + 1 === j) {
+          imprimirFila = imprimirFila + ' ';
+        } else if (i + 1 === n - j || i === n - j - 1) {
+          imprimirFila = imprimirFila + '\\';
+        } else {
+          imprimirFila = imprimirFila + ' ';
+        }
+      }
+      console.log(imprimirFila);
+    }
+  }
+</script>
+
+</body>
+</html>

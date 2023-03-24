@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 2</title>
+</head>
+<body>
+  <!--Tienes un arreglo con 20 elementos (enteros en el rango de 1 a 9). Escribe un programa en el lenguaje preferido que imprima el número que tiene más
+  ocurrencias seguidas en arreglo y también imprimir la cantidad de veces que
+  aparece en la secuencia.
+  El programa debe analizar el arreglo de derecha a izquierda para que en caso de que dos números cumplan la condición el que aparece por primera vez sea el que
+  se imprima.
+  -->
+  <script>
+
+    const arregloNumeros = [1, 2, 2, 5, 4, 6, 7, 8, 8, 8, 8, 7, 7, 3, 3, 3, 9, 9, 9, 9];
+    
+    let numeroActual = null;
+    let cantidadActual = 0;
+    let numeroMaximo = null;
+    let cantidadMaxima = 0;
+
+    for(let i = arregloNumeros.length - 1; i >= 0; i--){
+      if(arregloNumeros[i] === numeroActual){
+        cantidadActual++;
+      } else {
+        if(cantidadActual >= cantidadMaxima){
+          numeroMaximo = numeroActual;
+          cantidadMaxima = cantidadActual;
+        }
+        numeroActual = arregloNumeros[i];
+        cantidadActual = 1;
+      }
+      if (cantidadActual >= cantidadMaxima) {
+        numeroMaximo = numeroActual;
+        cantidadMaxima = cantidadActual;
+      }
+    }
+
+    console.log('El número más repetido de forma seguida es el ' + numeroMaximo + ', se repitió ' + cantidadMaxima + ' veces.');
+  </script>
+</body>
+</html>

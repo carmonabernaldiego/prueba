@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 3</title>
+</head>
+<body>
+  <!--Pensemos que tenemos de 2 puntos en un plano bidimensiones, y tenemos las
+coordenadas xy de esos dos puntos, por ejemplo [3,5] y [4,1]. Genera una algoritmo
+que se le ingrese las posiciones de los dos puntos y devuelva el calculo la distancia
+en línea recta entre los dos puntos.
+  -->
+  <script>
+    function calcularDistancia(x1, y1, x2, y2) {
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const distancia = Math.sqrt((dx * dx) + (dy * dy));
+      return distancia.toFixed(2);
+    }
+
+    let puntoA = [3, 5];
+    let puntoB = [4, 1];
+    
+    let distancia = calcularDistancia(puntoA[0], puntoA[1], puntoB[0], puntoB[1]);
+
+    console.log('La distancia entre el punto A [' + puntoA[0] + ',' + puntoA[1] + '] y el punto B [' + puntoB[0] + ',' + puntoB[1] + '] es: ' + distancia);
+    
+  </script>
+</body>
+</html>
